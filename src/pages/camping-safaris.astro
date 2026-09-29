@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import Safaris from '../components/Safaris.astro';
+import CtaBand from '../components/CtaBand.astro';
+import site from '../data/site.json';
+
+const page = site.pages.safaris;
+---
+
+<Base title={page.title} description={page.description}>
+  <Safaris page />
+  <CtaBand
+    heading="Ready for the outback?"
+    body="Call us to hear about upcoming safaris, or to plan a camping trip for your own group."
+  />
+</Base>

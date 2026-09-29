@@ -4,10 +4,8 @@ import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 
 const { business, nav } = site;
-
-// On inner pages, section links must point back at the homepage.
-const onHome = Astro.url.pathname === '/';
-const href = (link: string) => (onHome || !link.startsWith('#') ? link : `/${link}`);
+const path = Astro.url.pathname;
+const current = (href: string) => (path === href || path.startsWith(href) ? 'page' : undefined);
 ---
 
 <div class="utility">
@@ -26,7 +24,7 @@ const href = (link: string) => (onHome || !link.startsWith('#') ? link : `/${lin
 
     <nav class="nav-desktop" aria-label="Main">
       <ul>
-        {nav.map((item) => <li><a href={href(item.href)}>{item.label}</a></li>)}
+        {nav.map((item) => <li><a href={item.href} aria-current={current(item.href)}>{item.label}</a></li>)}
       </ul>
     </nav>
 
@@ -48,7 +46,7 @@ const href = (link: string) => (onHome || !link.startsWith('#') ? link : `/${lin
 
   <nav id="mobile-menu" class="nav-mobile" aria-label="Main" hidden>
     <ul class="container">
-      {nav.map((item) => <li><a href={href(item.href)}>{item.label}</a></li>)}
+      {nav.map((item) => <li><a href={item.href} aria-current={current(item.href)}>{item.label}</a></li>)}
       <li class="mobile-call">
         <a class="btn btn--primary" href={business.phoneHref}>
           <Icon name="phone" size={18} strokeWidth={2} />
@@ -80,7 +78,7 @@ const href = (link: string) => (onHome || !link.startsWith('#') ? link : `/${lin
         toggle.focus();
       }
     });
-    matchMedia('(min-width: 1100px)').addEventListener('change', (event) => {
+    matchMedia('(min-width: 1200px)').addEventListener('change', (event) => {
       if (event.matches) setOpen(false);
     });
   }
@@ -138,7 +136,7 @@ const href = (link: string) => (onHome || !link.startsWith('#') ? link : `/${lin
 
   .nav-desktop ul {
     display: flex;
-    gap: clamp(18px, 1.6vw, 30px);
+    gap: clamp(18px, 1.5vw, 28px);
   }
 
   .nav-desktop a,
@@ -149,6 +147,17 @@ const href = (link: string) => (onHome || !link.startsWith('#') ? link : `/${lin
   }
 
   .nav-desktop a:hover {
+    color: var(--accent);
+  }
+
+  .nav-desktop a[aria-current='page'] {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px;
+  }
+
+  .nav-mobile a[aria-current='page'] {
     color: var(--accent);
   }
 
@@ -225,7 +234,7 @@ const href = (link: string) => (onHome || !link.startsWith('#') ? link : `/${lin
     }
   }
 
-  @media (min-width: 1100px) {
+  @media (min-width: 1200px) {
     .nav-desktop,
     .call-desktop {
       display: flex;

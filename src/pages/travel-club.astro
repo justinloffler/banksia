@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import TravelClub from '../components/TravelClub.astro';
+import CtaBand from '../components/CtaBand.astro';
+import site from '../data/site.json';
+
+const { pages, travelClub, business } = site;
+const page = pages.travelClub;
+---
+
+<Base title={page.title} description={page.description}>
+  <TravelClub page />
+
+  <section class="section section--paper" aria-labelledby="outings-heading">
+    <div class="container stack">
+      <p class="eyebrow">Member outings</p>
+      <h2 id="outings-heading" class="h2">What members can choose from</h2>
+      <ul class="outings">
+        {
+          travelClub.outings.map((outing) => (
+            <li>
+              <h3>{outing.name}</h3>
+              <p class="range">{outing.km ? `Up to ${outing.range} from Adelaide` : outing.range}</p>
+              <p>{outing.detail}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Join the Travel Club"
+    body={`Call us on ${business.phone} with your details and we'll add you to the newsletter. There's no joining fee.`}
+  />
+</Base>
+
+<style>
+  .outings {
+    display: grid;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .outings li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: clamp(20px, 1rem + 0.6vw, 28px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--cream);
+  }
+
+  h3 {
+    font-size: var(--fs-h3);
+  }
+
+  .range {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--link);
+  }
+
+  .outings p:not(.range) {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  @media (min-width: 600px) {
+    .outings {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .outings {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

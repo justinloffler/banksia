@@ -2,16 +2,22 @@
 import site from '../data/site.json';
 import Icon from './Icon.astro';
 
-const { contact, business } = site;
+const { contact, business, pages } = site;
 const interestOptions = contact.form.fields.find((field) => field.name === 'interest')?.options ?? [];
 ---
 
 <section id="contact" class="contact container" aria-labelledby="contact-heading">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li aria-current="page">Contact</li>
+    </ol>
+  </nav>
   <div class="panel">
     <div class="about stack">
-      <p class="eyebrow">{contact.eyebrow}</p>
-      <h2 id="contact-heading" class="h2">{contact.heading}</h2>
-      <p class="lead">{contact.body}</p>
+      <p class="eyebrow">{pages.contact.eyebrow}</p>
+      <h1 id="contact-heading" class="h2">{pages.contact.heading}</h1>
+      <p class="lead">{pages.contact.lead}</p>
 
       <div class="details">
         <a class="detail" href={business.phoneHref}>
@@ -98,7 +104,32 @@ const interestOptions = contact.form.fields.find((field) => field.name === 'inte
 
 <style>
   .contact {
-    padding-block: 0 var(--section-y);
+    padding-block: clamp(24px, 1rem + 2vw, 56px) var(--section-y);
+  }
+
+  .crumbs ol {
+    display: flex;
+    gap: 8px;
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    color: var(--text-subtle);
+  }
+
+  .crumbs li + li::before {
+    content: '/';
+    margin-right: 8px;
+    color: var(--line-strong);
+  }
+
+  .crumbs a {
+    color: var(--text-subtle);
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 1.7rem + 3vw, 4rem);
+    line-height: 1.04;
   }
 
   .panel {

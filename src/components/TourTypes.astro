@@ -18,13 +18,16 @@ const { tours } = site;
     <ul class="cards">
       {
         tours.types.map((type) => (
-          <li class="card">
-            <span class="icon-tile">
-              <Icon name={type.icon as 'sun' | 'bed' | 'map' | 'bus'} size={26} />
-            </span>
-            <h3>{type.title}</h3>
-            <p class="meta">{type.meta}</p>
-            <p class="body">{type.body}</p>
+          <li>
+            <a class="card" href={type.href}>
+              <span class="icon-tile">
+                <Icon name={type.icon as 'sun' | 'bed' | 'map' | 'bus'} size={26} />
+              </span>
+              <h3>{type.title}</h3>
+              <p class="meta">{type.meta}</p>
+              <p class="body">{type.body}</p>
+              <span class="more">Find out more →</span>
+            </a>
           </li>
         ))
       }
@@ -33,7 +36,7 @@ const { tours } = site;
     <div class="also">
       <Icon name="check" size={24} class="also-icon" />
       <p><strong>Also on offer:</strong> {tours.alsoOnOffer}</p>
-      <a href="#contact">Ask about a trip →</a>
+      <a href="/group-tours/">See all tour types →</a>
     </div>
   </div>
 </section>
@@ -65,14 +68,36 @@ const { tours } = site;
     gap: 16px;
   }
 
+  .cards > li {
+    display: flex;
+  }
+
   .card {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 12px;
     padding: clamp(20px, 1rem + 0.6vw, 28px);
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
     background: var(--cream);
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+    transform: translateY(-2px);
+  }
+
+  .more {
+    margin-top: auto;
+    padding-top: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--link);
   }
 
   .icon-tile {

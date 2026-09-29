@@ -1,15 +1,22 @@
 ---
 import site from '../data/site.json';
 
+interface Props {
+  /** Full version for /travel-club/: renders the h1. */
+  page?: boolean;
+}
+
+const { page = false } = Astro.props;
 const { travelClub, business } = site;
+const Heading = page ? 'h1' : 'h2';
 const maxKm = 750;
 ---
 
-<section id="club" class="section" aria-labelledby="club-heading">
+<section id="club" class:list={['section', { 'is-page': page }]} aria-labelledby="club-heading">
   <div class="container layout">
     <div class="stack">
       <p class="eyebrow">{travelClub.eyebrow}</p>
-      <h2 id="club-heading" class="h2">{travelClub.heading}</h2>
+      <Heading id="club-heading" class="h2">{travelClub.heading}</Heading>
       {travelClub.body.map((paragraph) => <p class="lead">{paragraph}</p>)}
       <div class="join">
         <a class="btn btn--primary" href={travelClub.joinCta.href}>{travelClub.joinCta.label}</a>
@@ -18,6 +25,7 @@ const maxKm = 750;
           <span>{travelClub.perks[1]}</span>
         </p>
       </div>
+      {!page && <a class="more" href="/travel-club/">How the Travel Club works →</a>}
     </div>
 
     <div class="card">
@@ -55,6 +63,19 @@ const maxKm = 750;
     display: grid;
     gap: 40px;
     align-items: start;
+  }
+
+  .is-page {
+    padding-top: clamp(40px, 1.5rem + 4vw, 96px);
+  }
+
+  .is-page :global(h1) {
+    font-size: clamp(2.5rem, 1.7rem + 3vw, 4.25rem);
+    line-height: 1.04;
+  }
+
+  .more {
+    font-weight: 600;
   }
 
   .join {

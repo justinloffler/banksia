@@ -4,11 +4,18 @@ import Collage from './Collage.astro';
 import Icon from './Icon.astro';
 import Snap from './Snap.astro';
 
+interface Props {
+  /** Full version for /coaches-drivers/: renders the h1. */
+  page?: boolean;
+}
+
+const { page = false } = Astro.props;
 const { coaches } = site;
+const Heading = page ? 'h1' : 'h2';
 const [front, interior] = coaches.photos;
 ---
 
-<section id="coaches" class="section" aria-labelledby="coaches-heading">
+<section id="coaches" class:list={['section', { 'is-page': page }]} aria-labelledby="coaches-heading">
   <div class="container split">
     <Collage ratio={564 / 540}>
       <Snap {...front} x={0} y={0} w={68} rotate={-2} />
@@ -17,7 +24,7 @@ const [front, interior] = coaches.photos;
 
     <div class="stack">
       <p class="eyebrow">{coaches.eyebrow}</p>
-      <h2 id="coaches-heading" class="h2">{coaches.heading}</h2>
+      <Heading id="coaches-heading" class="h2">{coaches.heading}</Heading>
       <p class="lead">{coaches.body}</p>
       <ul class="checklist">
         {
@@ -29,15 +36,37 @@ const [front, interior] = coaches.photos;
           ))
         }
       </ul>
-      <div class="drivers">
-        <Icon name="shield" size={28} class="drivers-icon" />
-        <p>{coaches.drivers}</p>
-      </div>
+      {
+        !page && (
+          <>
+            <div class="drivers">
+              <Icon name="shield" size={28} class="drivers-icon" />
+              <p>{coaches.drivers}</p>
+            </div>
+            <a class="more" href="/coaches-drivers/">
+              Meet our coaches &amp; drivers →
+            </a>
+          </>
+        )
+      }
     </div>
   </div>
 </section>
 
 <style>
+  .is-page {
+    padding-top: clamp(40px, 1.5rem + 4vw, 96px);
+  }
+
+  .is-page :global(h1) {
+    font-size: clamp(2.5rem, 1.7rem + 3vw, 4.25rem);
+    line-height: 1.04;
+  }
+
+  .more {
+    font-weight: 600;
+  }
+
   .drivers {
     display: flex;
     gap: 18px;

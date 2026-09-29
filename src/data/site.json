@@ -18,29 +18,82 @@
     "fleet": "Volvo and Mercedes coaches, seating up to 48 passengers"
   },
   "nav": [
-    { "label": "Group tours", "href": "#tours" },
-    { "label": "Camping & safaris", "href": "#safaris" },
-    { "label": "Charters", "href": "#tours" },
-    { "label": "Travel Club", "href": "#club" },
-    { "label": "Our coaches", "href": "#coaches" },
-    { "label": "Contact", "href": "#contact" }
+    {
+      "label": "Group tours",
+      "href": "/group-tours/"
+    },
+    {
+      "label": "Safaris",
+      "href": "/camping-safaris/"
+    },
+    {
+      "label": "Charters",
+      "href": "/charters/"
+    },
+    {
+      "label": "Travel Club",
+      "href": "/travel-club/"
+    },
+    {
+      "label": "Our coaches",
+      "href": "/coaches-drivers/"
+    },
+    {
+      "label": "About",
+      "href": "/about/"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact/"
+    }
   ],
   "hero": {
     "eyebrow": "Day trips · Safaris · Extended holidays",
     "heading": "We've been almost everywhere.",
     "body": "Local and Australia-wide group tours and charters from Houghton in the Adelaide Hills. Forty years on, we still know the roads, the stops and how a tour should be done.",
-    "primaryCta": { "label": "Explore our tours", "href": "#tours" },
-    "secondaryCta": { "label": "Join the Travel Club", "href": "#club" },
+    "primaryCta": {
+      "label": "Explore our tours",
+      "href": "/group-tours/"
+    },
+    "secondaryCta": {
+      "label": "Join the Travel Club",
+      "href": "/travel-club/"
+    },
     "stats": [
-      { "value": "1984", "label": "Family run ever since" },
-      { "value": "48 seats", "label": "Volvo & Mercedes coaches" },
-      { "value": "1–21 days", "label": "Day trips to extended tours" }
+      {
+        "value": "1984",
+        "label": "Family run ever since"
+      },
+      {
+        "value": "48 seats",
+        "label": "Volvo & Mercedes coaches"
+      },
+      {
+        "value": "1–21 days",
+        "label": "Day trips to extended tours"
+      }
     ],
     "photos": [
-      { "src": "coach-on-tour.jpg", "alt": "A Banksia Tours coach parked on tour", "caption": "On tour" },
-      { "src": "coach-uluru.jpg", "alt": "Banksia coach and safari trailer at Uluru", "caption": "Uluru" },
-      { "src": "sturt-desert-pea.jpg", "alt": "Sturt's desert pea in flower", "caption": "Sturt's desert pea" },
-      { "src": "tour-group.jpg", "alt": "A tour group standing in front of a Banksia Tours coach", "caption": "The whole gang" }
+      {
+        "src": "coach-on-tour.jpg",
+        "alt": "A Banksia Tours coach parked on tour",
+        "caption": "On tour"
+      },
+      {
+        "src": "coach-uluru.jpg",
+        "alt": "Banksia coach and safari trailer at Uluru",
+        "caption": "Uluru"
+      },
+      {
+        "src": "sturt-desert-pea.jpg",
+        "alt": "Sturt's desert pea in flower",
+        "caption": "Sturt's desert pea"
+      },
+      {
+        "src": "tour-group.jpg",
+        "alt": "A tour group standing in front of a Banksia Tours coach",
+        "caption": "The whole gang"
+      }
     ]
   },
   "tours": {
@@ -52,27 +105,49 @@
         "title": "Day tours",
         "meta": "Up to 250 km · about 8.30–5.30",
         "body": "A leisurely pace, usually within 120 km of Adelaide, with driver commentary, morning tea from the coach, lunch and entry in one price.",
-        "icon": "sun"
+        "icon": "sun",
+        "href": "/group-tours/#day-tours"
       },
       {
         "title": "Short breaks",
         "meta": "2–6 days · up to 750 km",
         "body": "Round trips that never take the same road twice — the Riverland, Port Lincoln, Kangaroo Island, the Grampians, Broken Hill and more.",
         "icon": "bed",
-        "popular": ["The Riverland", "Port Lincoln", "Whale watching at the Head of the Bight", "Arkaroola & the Flinders Ranges", "Kangaroo Island", "Mount Gambier & the South East", "The Grampians", "Broken Hill", "Mildura, Swan Hill & the Sunraysia district", "Bright & the Victorian alpine area", "Melbourne & the Mornington Peninsula"]
+        "popular": [
+          "The Riverland",
+          "Port Lincoln",
+          "Whale watching at the Head of the Bight",
+          "Arkaroola & the Flinders Ranges",
+          "Kangaroo Island",
+          "Mount Gambier & the South East",
+          "The Grampians",
+          "Broken Hill",
+          "Mildura, Swan Hill & the Sunraysia district",
+          "Bright & the Victorian alpine area",
+          "Melbourne & the Mornington Peninsula"
+        ],
+        "href": "/group-tours/#short-breaks"
       },
       {
         "title": "Extended holidays",
         "meta": "7–21 days · anywhere",
         "body": "The Red Centre, Canberra, Sydney and the Blue Mountains, the Gold Coast, Tasmania — with 2–4 night stays built in for a breather.",
         "icon": "map",
-        "popular": ["The Red Centre", "Canberra", "Sydney & the Blue Mountains", "The Gold Coast & Surfers Paradise", "Tasmania"]
+        "popular": [
+          "The Red Centre",
+          "Canberra",
+          "Sydney & the Blue Mountains",
+          "The Gold Coast & Surfers Paradise",
+          "Tasmania"
+        ],
+        "href": "/group-tours/#extended-holidays"
       },
       {
         "title": "Charters",
         "meta": "Half day to interstate",
         "body": "Just need the coach? We'll pick up and drop off wherever you like, in SA or Australia-wide — plus advice on where to stay and what to see.",
-        "icon": "bus"
+        "icon": "bus",
+        "href": "/charters/"
       }
     ],
     "alsoOnOffer": "Monthly mystery trips, weekends in the snowfields and full 5–7 day ski holidays, and tours tailored for seniors and special-interest groups."
@@ -81,13 +156,43 @@
     "eyebrow": "Camping & safari tours",
     "heading": "See the outback when the Sturt peas flower",
     "body": "Worried about gear and supplies? Don't be. Our safaris are fully self-contained and catered — a caravan park one night, a bush camp around the fire the next — and you see the same sights as an accommodated tour for considerably less.",
-    "kit": ["Towed safari kitchen trailer", "3 × 3 m tents for 2–4 people", "Sleeping mattresses", "Trestles, camp stools & eating gear", "240 V generator for lighting", "Good meals, special diets on request"],
-    "destinations": ["Flinders Ranges", "Red Centre", "Top End", "Queensland", "NSW", "Outback Australia"],
+    "kit": [
+      "Towed safari kitchen trailer",
+      "3 × 3 m tents for 2–4 people",
+      "Sleeping mattresses",
+      "Trestles, camp stools & eating gear",
+      "240 V generator for lighting",
+      "Good meals, special diets on request"
+    ],
+    "destinations": [
+      "Flinders Ranges",
+      "Red Centre",
+      "Top End",
+      "Queensland",
+      "NSW",
+      "Outback Australia"
+    ],
     "photos": [
-      { "src": "safari-camp-tents.jpg", "alt": "A row of safari tents set up beneath a rocky range", "caption": "Camp's set up" },
-      { "src": "safari-kitchen.jpg", "alt": "Travellers gathered around the safari kitchen trailer", "caption": "The safari kitchen" },
-      { "src": "bush-camp-lunch.jpg", "alt": "A tour group sitting together at a bush camp", "caption": "Lunch under the gums" },
-      { "src": "coach-desert-peas.jpg", "alt": "Sturt's desert peas flowering beside the Banksia coach", "caption": "Worth the drive" }
+      {
+        "src": "safari-camp-tents.jpg",
+        "alt": "A row of safari tents set up beneath a rocky range",
+        "caption": "Camp's set up"
+      },
+      {
+        "src": "safari-kitchen.jpg",
+        "alt": "Travellers gathered around the safari kitchen trailer",
+        "caption": "The safari kitchen"
+      },
+      {
+        "src": "bush-camp-lunch.jpg",
+        "alt": "A tour group sitting together at a bush camp",
+        "caption": "Lunch under the gums"
+      },
+      {
+        "src": "coach-desert-peas.jpg",
+        "alt": "Sturt's desert peas flowering beside the Banksia coach",
+        "caption": "Worth the drive"
+      }
     ]
   },
   "travelClub": {
@@ -97,14 +202,50 @@
       "Members get our regular newsletter of upcoming trips, pick the ones that suit them and pay group prices. Where we can, we'll collect you at or near your home.",
       "Most members are over-50s, seniors and retirees — easy-going people who enjoy good company — and smaller clubs use it too when they can't make up the numbers."
     ],
-    "joinCta": { "label": "Join on 08 8380 5588", "href": "tel:0883805588" },
-    "perks": ["No joining fee", "Members help plan future trips"],
+    "joinCta": {
+      "label": "Join on 08 8380 5588",
+      "href": "tel:0883805588"
+    },
+    "perks": [
+      "No joining fee",
+      "Members help plan future trips"
+    ],
     "outings": [
-      { "name": "Mystery trips", "note": "Destination kept secret", "range": "160 km", "km": 160, "detail": "Budget touring: coach cost plus complimentary morning tea; bring lunch or buy it nearby. A different place every time." },
-      { "name": "Day tours", "note": "All-inclusive package", "range": "250 km", "km": 250, "detail": "Set itinerary with driver commentary, morning tea, lunch and entertainment or entry fees in one price." },
-      { "name": "Quick trips", "note": "2–3 days, budget touring", "range": "400 km", "km": 400, "detail": "Overnight accommodation, daily morning tea, breakfasts and evening meals. A round trip, so you see as much as possible." },
-      { "name": "3–6 day tours", "note": "Mostly one motel base", "range": "750 km", "km": 750, "detail": "Packaged with commentary, most morning teas, entry fees, accommodation and meals. We avoid travelling the same road twice." },
-      { "name": "7–21 day tours", "note": "Everything in the itinerary", "range": "Anywhere in Australia", "km": null, "detail": "Mix of one-night stays and 2–4 night stays so you get a break from moving." }
+      {
+        "name": "Mystery trips",
+        "note": "Destination kept secret",
+        "range": "160 km",
+        "km": 160,
+        "detail": "Budget touring: coach cost plus complimentary morning tea; bring lunch or buy it nearby. A different place every time."
+      },
+      {
+        "name": "Day tours",
+        "note": "All-inclusive package",
+        "range": "250 km",
+        "km": 250,
+        "detail": "Set itinerary with driver commentary, morning tea, lunch and entertainment or entry fees in one price."
+      },
+      {
+        "name": "Quick trips",
+        "note": "2–3 days, budget touring",
+        "range": "400 km",
+        "km": 400,
+        "detail": "Overnight accommodation, daily morning tea, breakfasts and evening meals. A round trip, so you see as much as possible."
+      },
+      {
+        "name": "3–6 day tours",
+        "note": "Mostly one motel base",
+        "range": "750 km",
+        "km": 750,
+        "detail": "Packaged with commentary, most morning teas, entry fees, accommodation and meals. We avoid travelling the same road twice."
+      },
+      {
+        "name": "7–21 day tours",
+        "note": "Everything in the itinerary",
+        "range": "Anywhere in Australia",
+        "km": null,
+        "detail": "Mix of one-night stays and 2–4 night stays so you get a break from moving."
+      }
     ]
   },
   "specialEvents": {
@@ -112,23 +253,89 @@
     "heading": "Name the occasion — we've probably driven there",
     "intro": "Birdwatchers, bowlers, gem hunters, gardeners, car-racing fans, dancers, wedding parties. A few of the trips we've run over the years:",
     "groups": [
-      { "title": "Racing fans", "items": ["Phillip Island Motorcycle Grand Prix", "Bathurst", "Eastern Creek Raceway", "Canberra Summernats"] },
-      { "title": "Green thumbs", "items": ["Canberra Floriade", "Melbourne Flower Show", "Ballarat Begonia Festival"] },
-      { "title": "The outback", "items": ["Curdimurka Outback Ball", "The Camel Cup", "Henley-on-Todd, Alice Springs"] },
-      { "title": "Every year", "items": ["Whale watching at the Head of the Bight", "Port Lincoln Tunarama"] },
-      { "title": "Once in a lifetime", "items": ["The Sydney Olympics", "A total solar eclipse"] }
+      {
+        "title": "Racing fans",
+        "items": [
+          "Phillip Island Motorcycle Grand Prix",
+          "Bathurst",
+          "Eastern Creek Raceway",
+          "Canberra Summernats"
+        ]
+      },
+      {
+        "title": "Green thumbs",
+        "items": [
+          "Canberra Floriade",
+          "Melbourne Flower Show",
+          "Ballarat Begonia Festival"
+        ]
+      },
+      {
+        "title": "The outback",
+        "items": [
+          "Curdimurka Outback Ball",
+          "The Camel Cup",
+          "Henley-on-Todd, Alice Springs"
+        ]
+      },
+      {
+        "title": "Every year",
+        "items": [
+          "Whale watching at the Head of the Bight",
+          "Port Lincoln Tunarama"
+        ]
+      },
+      {
+        "title": "Once in a lifetime",
+        "items": [
+          "The Sydney Olympics",
+          "A total solar eclipse"
+        ]
+      }
     ],
-    "interestGroups": ["Flowers & plants", "Bird watching", "Dancing or marching", "Fishing", "Gems & minerals", "Geology", "History", "Bushwalking", "Bowling", "Motocross & BMX", "Sports", "Canoeing", "Snow skiing", "Camping & safari", "Car racing", "Weddings"]
+    "interestGroups": [
+      "Flowers & plants",
+      "Bird watching",
+      "Dancing or marching",
+      "Fishing",
+      "Gems & minerals",
+      "Geology",
+      "History",
+      "Bushwalking",
+      "Bowling",
+      "Motocross & BMX",
+      "Sports",
+      "Canoeing",
+      "Snow skiing",
+      "Camping & safari",
+      "Car racing",
+      "Weddings"
+    ]
   },
   "coaches": {
     "eyebrow": "Coaches & drivers",
     "heading": "Quiet coaches, drivers who know the roads",
     "body": "Our Volvo and Mercedes coaches seat up to 48 and are kept in tip-top condition, so the hours on board pass quickly.",
-    "features": ["Cloth reclining seats", "Heating & air conditioning", "On-board rest room", "Reading lamps & curtains", "Large underfloor luggage bays", "PA, music & video on board"],
+    "features": [
+      "Cloth reclining seats",
+      "Heating & air conditioning",
+      "On-board rest room",
+      "Reading lamps & curtains",
+      "Large underfloor luggage bays",
+      "PA, music & video on board"
+    ],
     "drivers": "Our drivers hold hazard licences for the Victorian and NSW alpine areas and know outback dirt roads in all weather. On express runs over 12 hours, two drivers share the wheel with a regulation sleeper bunk on board.",
     "photos": [
-      { "src": "coach-front.jpg", "alt": "Front of a white Banksia Tours coach", "caption": "Polished and ready to roll" },
-      { "src": "coach-interior-seats.jpg", "alt": "Rows of cloth reclining seats inside a Banksia coach", "caption": "Cloth recliners, all 48" }
+      {
+        "src": "coach-front.jpg",
+        "alt": "Front of a white Banksia Tours coach",
+        "caption": "Polished and ready to roll"
+      },
+      {
+        "src": "coach-interior-seats.jpg",
+        "alt": "Rows of cloth reclining seats inside a Banksia coach",
+        "caption": "Cloth recliners, all 48"
+      }
     ]
   },
   "contact": {
@@ -137,23 +344,204 @@
     "body": "We're a small family business just north-east of Adelaide, so our overheads are low and we pass that on. Plenty of our regulars tell us our tours match — or beat — the upmarket operators. Tell us what you have in mind and we'll help with the rest.",
     "form": {
       "fields": [
-        { "name": "name", "label": "Your name", "type": "text", "required": true },
-        { "name": "phone", "label": "Phone", "type": "tel" },
-        { "name": "email", "label": "Email", "type": "email" },
-        { "name": "interest", "label": "I'm interested in", "type": "select", "options": ["A day tour", "A short break (2–6 days)", "An extended holiday", "A camping safari", "A charter", "Joining the Travel Club"] },
-        { "name": "travellers", "label": "Number of travellers", "type": "number" },
-        { "name": "message", "label": "Where and when?", "type": "textarea" }
+        {
+          "name": "name",
+          "label": "Your name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "phone",
+          "label": "Phone",
+          "type": "tel"
+        },
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "email"
+        },
+        {
+          "name": "interest",
+          "label": "I'm interested in",
+          "type": "select",
+          "options": [
+            "A day tour",
+            "A short break (2–6 days)",
+            "An extended holiday",
+            "A camping safari",
+            "A charter",
+            "Joining the Travel Club"
+          ]
+        },
+        {
+          "name": "travellers",
+          "label": "Number of travellers",
+          "type": "number"
+        },
+        {
+          "name": "message",
+          "label": "Where and when?",
+          "type": "textarea"
+        }
       ],
       "submitLabel": "Send enquiry"
     }
   },
   "terms": {
     "_note": "Summary of the Terms & Conditions page on the old site. Have the owner confirm before publishing.",
-    "payment": ["Cash", "Cheque (personal, bank or business)", "Money order", "Direct / electronic transfer", "Barter Card"],
+    "payment": [
+      "Cash",
+      "Cheque (personal, bank or business)",
+      "Money order",
+      "Direct / electronic transfer",
+      "Barter Card"
+    ],
     "deposits": "Within 7 days of confirming a booking, a suitable deposit (by agreement or as set out in the itinerary) is required on all long-distance charters and tours. Day trips don't normally need a deposit unless we must pay one to hold entertainment or services.",
     "localChartersAndTours": "Full payment on the day for charters; payment in full before departure for tours that include meals, entertainment, entry fees or services.",
     "longDistance": "Charters: full payment 7 days before departure. Tours including accommodation, meals, entertainment and entry: paid in full at least 21 days before departure.",
     "extendedHolidays": "Full payment 21 days before departure.",
     "refunds": "At management's discretion. Cancellation or full travel insurance is strongly recommended. Money paid to third parties on your behalf is subject to their policies. Health-related cancellations need a doctor's certificate. Where practical, we'll let you take the same tour later at the same price or credit the fare to another tour."
+  },
+  "pages": {
+    "groupTours": {
+      "title": "Group tours from Adelaide — day tours, short breaks & extended holidays | Banksia Tours",
+      "description": "Leisurely coach day tours from Adelaide, mystery trips, 2–6 day short breaks and 7–21 day holidays anywhere in Australia, priced as all-inclusive packages.",
+      "eyebrow": "Group tours",
+      "heading": "Day trips, short breaks and holidays Australia-wide",
+      "lead": "Pick from our popular tours or have one tailored to your group. Most are priced as a package, so meals, attractions and entertainment are in with the coach."
+    },
+    "safaris": {
+      "title": "Camping & safari tours — Flinders Ranges, Red Centre & outback | Banksia Tours",
+      "description": "Fully self-contained, catered camping safaris to the Flinders Ranges, Red Centre, Top End, Queensland, NSW and outback Australia. Tents, kitchen and meals provided."
+    },
+    "charters": {
+      "title": "Coach charters & group trips — SA and Australia-wide | Banksia Tours",
+      "description": "Local and long-distance coach charters for clubs, schools, seniors, special-interest groups and weddings. Volvo and Mercedes coaches seating up to 48.",
+      "eyebrow": "Charters & groups",
+      "heading": "Your group, our coach — across town or across the country",
+      "lead": "Charters are for groups who just need the coach: we pick you up and drop you off wherever you need, in SA or Australia-wide. Or let us organise the whole trip."
+    },
+    "travelClub": {
+      "title": "The Banksia Travel Club — group prices for individual travellers | Banksia Tours",
+      "description": "Join the Banksia Tours Travel Club for mystery trips, day tours, weekends away and extended holidays at group prices. No joining fee."
+    },
+    "coaches": {
+      "title": "Our coaches & drivers | Banksia Tours",
+      "description": "Quiet, comfortable Volvo and Mercedes coaches seating up to 48, with experienced drivers who know alpine and outback roads."
+    },
+    "about": {
+      "title": "About Banksia Tours — a family business since 1984",
+      "description": "Banksia Tours is a small family business based in Houghton in the Adelaide Hills, running coach tours and charters since 1984.",
+      "eyebrow": "About us",
+      "heading": "A family business, on the road since 1984",
+      "lead": "Banksia Tours has been run by the same family from Houghton, just north-east of Adelaide, since 1984. Our hands-on experience covers every part of coach touring and charter for individuals and groups."
+    },
+    "contact": {
+      "title": "Contact Banksia Tours — 08 8380 5588",
+      "description": "Call David Camilleri on 08 8380 5588 or send an enquiry about day tours, holidays, camping safaris, charters or the Travel Club.",
+      "eyebrow": "Contact us",
+      "heading": "Let's plan your next trip",
+      "lead": "A Banksia Tours trip can start from anywhere in South Australia and take in almost any region or city in Australia. The quickest way to book is a phone call."
+    }
+  },
+  "groupTours": {
+    "dayTours": {
+      "title": "Day tours",
+      "meta": "Up to 250 km · about 8.30am–5.30pm",
+      "body": [
+        "Our day tours usually stay within about 120 km of Adelaide so the pace stays leisurely, but they can go as far as 250 km. We have an extensive list of popular day tours and ideas, or we can tailor one to your group.",
+        "A day tour normally runs from around 8 or 8.30am until 5 or 5.30pm, and we can make it shorter or longer to suit you. We usually price it as a package for your group's numbers, including meals, attractions or entertainment along with the coach. Prefer just the sightseeing? We can do that too, with lunch and activities at your own expense.",
+        "A complimentary morning tea can be served from the coach."
+      ]
+    },
+    "mystery": {
+      "title": "Mystery trips",
+      "meta": "Up to 160 km · monthly",
+      "body": "The destination is kept secret until you're there, and it's somewhere different every time. Set up for budget touring: you pay for the coach, morning tea is on us, and we always stop where lunch can be bought — or bring your own."
+    },
+    "shortBreaks": {
+      "title": "Short breaks",
+      "meta": "2–6 days · up to 750 km",
+      "body": [
+        "Quick trips of 2 or 3 days go up to 400 km from Adelaide, with overnight accommodation, breakfasts, evening meals and daily morning tea. We take a different road home so you see as much as possible.",
+        "3–6 day tours go up to 750 km and mostly stay at the same motel each night. They're packaged with commentary, most morning teas, entry fees, accommodation and meals — and we avoid travelling the same road twice."
+      ]
+    },
+    "extended": {
+      "title": "Extended holidays",
+      "meta": "7–21 days · anywhere in Australia",
+      "body": [
+        "These tours can go anywhere in Australia, with everything in the itinerary included. Because of the distances, some nights are one-night stays, but we build in 2–4 night stays so you get a break from moving."
+      ]
+    },
+    "snow": {
+      "title": "Snow trips",
+      "body": "From a weekend in the snowfields to a full 5–7 day ski holiday. Our drivers hold hazard licences for the Victorian and NSW alpine areas."
+    }
+  },
+  "charters": {
+    "points": [
+      "Half-day, full-day and overnight trips",
+      "Long weekends and 3–6 day trips",
+      "Extended interstate holidays of 7–21 days",
+      "Pick-up and drop-off wherever you need",
+      "Coaches seating up to 48 passengers",
+      "Advice on where to stay, timings, venues and events"
+    ],
+    "seniors": {
+      "heading": "Seniors & special-interest groups",
+      "body": "We tailor tours to your group: venues to suit you, a comfortable pace and a price that fits your budget. We're happy to come to your club or senior citizens' meeting to talk about trip options.",
+      "points": [
+        "Tours tailored to your requirements",
+        "Venues to suit you",
+        "A pace comfortable to you",
+        "A price suited to your budget"
+      ]
+    }
+  },
+  "coachesPage": {
+    "express": {
+      "heading": "Express long-distance runs",
+      "body": [
+        "When a group needs to cover a long distance quickly and safely, we run it as an express trip. For journeys over 12 hours, two drivers share the wheel, with a regulation sleeper bunk at the back of the coach so one can rest while the other drives.",
+        "Coaches are limited to 100 km/h on the open road. With short breaks every 3–4 hours we average about 80 km an hour, so a 1,500 km trip — Adelaide to Sydney or Alice Springs — takes under 20 hours, depending on traffic and weather.",
+        "Overnight driving means watching for wildlife and wandering stock, so our drivers stay rested and alert while you sleep. The on-board rest room means fewer stops."
+      ]
+    },
+    "drivers": {
+      "heading": "Our drivers",
+      "body": [
+        "Our professional drivers are knowledgeable, informative and easy to get along with. They hold high standards and know the roads and regulations well above average.",
+        "They hold hazard licences for the Victorian and NSW alpine areas and have hands-on experience with outback conditions and dirt roads in all weather — and they're always ready to join in the fun."
+      ]
+    }
+  },
+  "about": {
+    "services": [
+      "Simple transfers and special functions across town",
+      "Organised day tours with attractions and meals",
+      "Weekends and trips of a few days away",
+      "Quick country or interstate trips, through to fully organised extended tours",
+      "Overnight camping trips through to fully catered outback safaris",
+      "Snowfield weekends and 5–7 day ski holidays"
+    ],
+    "values": [
+      {
+        "title": "We know the roads",
+        "body": "We know our vehicles, the roads and changing conditions, and your safety and satisfaction always come first."
+      },
+      {
+        "title": "Comfortable coaches",
+        "body": "Safe, comfortable, reliable and well-maintained Volvo and Mercedes coaches."
+      },
+      {
+        "title": "Fair prices",
+        "body": "As a small business we have lower overheads, and we pass the savings on. Clients find our prices comfortable."
+      },
+      {
+        "title": "Tours done properly",
+        "body": "Many clients tell us our tours are equal to — or better than — similar tours with upmarket companies."
+      }
+    ]
   }
 }

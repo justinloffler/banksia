@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import Coaches from '../components/Coaches.astro';
+import DetailBlock from '../components/DetailBlock.astro';
+import InfoCard from '../components/InfoCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import site from '../data/site.json';
+
+const { pages, coachesPage } = site;
+const page = pages.coaches;
+---
+
+<Base title={page.title} description={page.description}>
+  <Coaches page />
+
+  <DetailBlock id="drivers" title={coachesPage.drivers.heading} meta="Experienced & licensed" body={coachesPage.drivers.body} paper>
+    <InfoCard title="Driver qualifications" tone="sand">
+      <ul>
+        <li>Hazard licences for the Victorian &amp; NSW alpine areas</li>
+        <li>All-weather outback and dirt-road experience</li>
+        <li>Above-average knowledge of roads and regulations</li>
+      </ul>
+    </InfoCard>
+  </DetailBlock>
+
+  <DetailBlock id="express" title={coachesPage.express.heading} meta="Express coaches" body={coachesPage.express.body}>
+    <dl class="facts">
+      <div><dt>Open-road limit for coaches</dt><dd>100 km/h</dd></div>
+      <div><dt>Average including breaks</dt><dd>~80 km/h</dd></div>
+      <div><dt>Adelaide to Sydney or Alice Springs</dt><dd>&lt; 20 hrs</dd></div>
+      <div><dt>Drivers on runs over 12 hours</dt><dd>2</dd></div>
+    </dl>
+  </DetailBlock>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: var(--line);
+  }
+
+  .facts div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: clamp(18px, 1rem + 0.6vw, 26px);
+    background: var(--paper);
+  }
+
+  dt {
+    font-size: 14px;
+    color: var(--text-subtle);
+  }
+
+  dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(30px, 1.5rem + 1vw, 40px);
+    line-height: 1;
+  }
+</style>

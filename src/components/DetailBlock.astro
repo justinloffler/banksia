@@ -1,0 +1,44 @@
+---
+interface Props {
+  id?: string;
+  title: string;
+  meta?: string;
+  body: string | string[];
+  paper?: boolean;
+}
+
+const { id, title, meta, body, paper = false } = Astro.props;
+const paragraphs = Array.isArray(body) ? body : [body];
+const hasAside = Astro.slots.has('default');
+---
+
+<section id={id} class:list={['section', { 'section--paper': paper }]} aria-labelledby={id ? `${id}-heading` : undefined}>
+  <div class:list={['container layout', { 'has-aside': hasAside }]}>
+    <div class="stack">
+      {meta && <p class="eyebrow">{meta}</p>}
+      <h2 id={id ? `${id}-heading` : undefined} class="h2">{title}</h2>
+      {paragraphs.map((text) => <p class="lead">{text}</p>)}
+      <slot name="after" />
+    </div>
+    {hasAside && <div class="aside"><slot /></div>}
+  </div>
+</section>
+
+<style>
+  .layout {
+    display: grid;
+    gap: 36px;
+    align-items: start;
+  }
+
+  .stack {
+    max-width: 680px;
+  }
+
+  @media (min-width: 900px) {
+    .has-aside {
+      grid-template-columns: 7fr 5fr;
+      gap: 72px;
+    }
+  }
+</style>

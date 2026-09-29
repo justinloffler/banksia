@@ -4,27 +4,39 @@ import Collage from './Collage.astro';
 import Icon from './Icon.astro';
 import Snap from './Snap.astro';
 
+interface Props {
+  /** Full version for /camping-safaris/: h1 and the kit list. */
+  page?: boolean;
+}
+
+const { page = false } = Astro.props;
 const { safaris } = site;
+const Heading = page ? 'h1' : 'h2';
 const [tents, kitchen, lunch, peas] = safaris.photos;
 ---
 
-<section id="safaris" class="section section--forest" aria-labelledby="safaris-heading">
+<section id="safaris" class:list={['section section--forest', { 'is-page': page }]} aria-labelledby="safaris-heading">
   <div class="container split">
     <div class="stack">
       <p class="eyebrow">{safaris.eyebrow}</p>
-      <h2 id="safaris-heading" class="h2">{safaris.heading}</h2>
+      <Heading id="safaris-heading" class="h2">{safaris.heading}</Heading>
       <p class="lead">{safaris.body}</p>
 
-      <ul class="checklist">
-        {
-          safaris.kit.map((item) => (
-            <li>
-              <Icon name="check" size={18} strokeWidth={2.2} />
-              {item}
-            </li>
-          ))
-        }
-      </ul>
+      {
+        page && (
+          <>
+            <h2 class="kit-heading">What we bring</h2>
+            <ul class="checklist">
+              {safaris.kit.map((item) => (
+                <li>
+                  <Icon name="check" size={18} strokeWidth={2.2} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
 
       <div class="destinations">
         <h3>Safari destinations</h3>
@@ -32,6 +44,13 @@ const [tents, kitchen, lunch, peas] = safaris.photos;
           {safaris.destinations.map((place) => <li>{place}</li>)}
         </ul>
       </div>
+      {
+        !page && (
+          <a class="btn btn--light" href="/camping-safaris/">
+            Explore camping &amp; safaris
+          </a>
+        )
+      }
     </div>
 
     <Collage ratio={564 / 620}>
@@ -53,6 +72,31 @@ const [tents, kitchen, lunch, peas] = safaris.photos;
     flex-direction: column;
     gap: 12px;
     margin-top: 4px;
+  }
+
+  .is-page {
+    padding-top: clamp(40px, 1.5rem + 4vw, 96px);
+  }
+
+  .is-page :global(h1) {
+    font-size: clamp(2.5rem, 1.7rem + 3vw, 4.25rem);
+    line-height: 1.04;
+  }
+
+  .kit-heading {
+    margin-top: 6px;
+    font-size: clamp(22px, 1.2rem + 0.5vw, 26px);
+  }
+
+  .btn--light {
+    align-self: flex-start;
+    border-color: var(--on-dark);
+    color: var(--on-dark);
+  }
+
+  .btn--light:hover {
+    background: var(--on-dark);
+    color: var(--ink);
   }
 
   h3 {

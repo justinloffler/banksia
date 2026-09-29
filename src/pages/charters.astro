@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import DetailBlock from '../components/DetailBlock.astro';
+import InfoCard from '../components/InfoCard.astro';
+import Collage from '../components/Collage.astro';
+import Snap from '../components/Snap.astro';
+import SpecialEvents from '../components/SpecialEvents.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import site from '../data/site.json';
+
+const { pages, charters, specialEvents, business } = site;
+const page = pages.charters;
+---
+
+<Base title={page.title} description={page.description}>
+  <PageHeader crumb="Charters" eyebrow={page.eyebrow} heading={page.heading} lead={page.lead}>
+    <Collage ratio={568 / 520}>
+      <Snap src="tour-group.jpg" alt="A tour group standing in front of a Banksia Tours coach" caption="Club day out" x={0} y={4} w={62} rotate={-3} ratio={1.4} eager />
+      <Snap src="coach-on-tour.jpg" alt="A Banksia Tours coach parked on tour" caption="Wherever you need" x={44} y={42} w={54} rotate={3} eager />
+    </Collage>
+  </PageHeader>
+
+  <DetailBlock
+    id="charters"
+    title="Trips of every length"
+    meta="Coach charters"
+    body="Our trips range from half and full days to overnight stays, long weekends and 3–6 day trips, through to extended interstate holidays of 7–21 days — and we're happy to fit in with your plans. We'll share what we know about where to stay, trip times, outings, venues and special events."
+    paper
+  >
+    <InfoCard title="What you get" tone="sand">
+      <ul class="checks">
+        {
+          charters.points.map((point) => (
+            <li>
+              <Icon name="check" size={18} strokeWidth={2.2} />
+              {point}
+            </li>
+          ))
+        }
+      </ul>
+    </InfoCard>
+  </DetailBlock>
+
+  <DetailBlock id="groups" title={charters.seniors.heading} meta="Seniors & clubs" body={charters.seniors.body}>
+    <InfoCard title="Groups we travel with">
+      <ul class="chips">
+        {specialEvents.interestGroups.map((group) => <li>{group}</li>)}
+      </ul>
+    </InfoCard>
+  </DetailBlock>
+
+  <SpecialEvents />
+
+  <CtaBand
+    heading="Get a quote for your group"
+    body={`Tell us your dates, numbers and where you'd like to go. Call ${business.contactPerson} or send an enquiry.`}
+  />
+</Base>
+
+<style>
+  .checks li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .checks :global(svg) {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--label-green);
+  }
+
+  .chips {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chips li {
+    padding: 7px 14px !important;
+    border: 1px solid var(--line-strong) !important;
+    border-radius: var(--radius-pill);
+    font-size: 15px !important;
+  }
+</style>

@@ -3,8 +3,6 @@ import site from '../data/site.json';
 
 const { business } = site;
 const year = new Date().getFullYear();
-const onHome = Astro.url.pathname === '/';
-const href = (link: string) => (onHome || !link.startsWith('#') ? link : `/${link}`);
 ---
 
 <footer class="footer">
@@ -20,20 +18,20 @@ const href = (link: string) => (onHome || !link.startsWith('#') ? link : `/${lin
       <nav aria-label="Travel with us">
         <h2>Travel with us</h2>
         <ul>
-          <li><a href={href('#tours')}>Group tours</a></li>
-          <li><a href={href('#safaris')}>Camping &amp; safaris</a></li>
-          <li><a href={href('#tours')}>Charters</a></li>
-          <li><a href={href('#club')}>Travel Club</a></li>
+          <li><a href="/group-tours/">Group tours</a></li>
+          <li><a href="/camping-safaris/">Camping &amp; safaris</a></li>
+          <li><a href="/charters/">Charters &amp; groups</a></li>
+          <li><a href="/travel-club/">Travel Club</a></li>
         </ul>
       </nav>
 
       <nav aria-label="Company">
         <h2>Company</h2>
         <ul>
-          <li><a href={href('#contact')}>About us</a></li>
-          <li><a href={href('#coaches')}>Coaches &amp; drivers</a></li>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/coaches-drivers/">Coaches &amp; drivers</a></li>
           <li><a href="/terms/">Terms &amp; conditions</a></li>
-          <li><a href={href('#contact')}>Contact</a></li>
+          <li><a href="/contact/">Contact</a></li>
         </ul>
       </nav>
 

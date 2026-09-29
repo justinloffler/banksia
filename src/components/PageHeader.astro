@@ -1,0 +1,87 @@
+---
+interface Props {
+  eyebrow: string;
+  heading: string;
+  lead?: string;
+  crumb: string;
+}
+
+const { eyebrow, heading, lead, crumb } = Astro.props;
+const hasAside = Astro.slots.has('default');
+---
+
+<section class:list={['page-header container', { 'has-aside': hasAside }]}>
+  <div class="copy">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">{crumb}</li>
+      </ol>
+    </nav>
+    <p class="eyebrow"><span class="rule" aria-hidden="true"></span>{eyebrow}</p>
+    <h1>{heading}</h1>
+    {lead && <p class="lead">{lead}</p>}
+    <slot name="actions" />
+  </div>
+  {hasAside && <div class="aside"><slot /></div>}
+</section>
+
+<style>
+  .page-header {
+    display: grid;
+    gap: 40px;
+    align-items: center;
+    padding-block: clamp(28px, 1rem + 3vw, 72px) clamp(44px, 1.5rem + 4vw, 96px);
+  }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 0.8rem + 0.8vw, 24px);
+    max-width: 760px;
+  }
+
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    color: var(--text-subtle);
+  }
+
+  .crumbs li + li::before {
+    content: '/';
+    margin-right: 8px;
+    color: var(--line-strong);
+  }
+
+  .crumbs a {
+    color: var(--text-subtle);
+  }
+
+  .rule {
+    width: 28px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 1.7rem + 3vw, 4.25rem);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+  }
+
+  .lead {
+    max-width: 620px;
+  }
+
+  @media (min-width: 900px) {
+    .has-aside {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 64px;
+    }
+  }
+</style>

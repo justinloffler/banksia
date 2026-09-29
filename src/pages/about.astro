@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import DetailBlock from '../components/DetailBlock.astro';
+import InfoCard from '../components/InfoCard.astro';
+import Collage from '../components/Collage.astro';
+import Snap from '../components/Snap.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import site from '../data/site.json';
+
+const { pages, about, business } = site;
+const page = pages.about;
+---
+
+<Base title={page.title} description={page.description}>
+  <PageHeader crumb="About" eyebrow={page.eyebrow} heading={page.heading} lead={page.lead}>
+    <Collage ratio={568 / 520}>
+      <Snap src="coach-front.jpg" alt="Front of a white Banksia Tours coach" caption="Est. 1984" x={0} y={4} w={62} rotate={-3} eager />
+      <Snap src="bush-camp-lunch.jpg" alt="A tour group sitting together at a bush camp" caption="Good company" x={44} y={42} w={54} rotate={3} eager />
+    </Collage>
+  </PageHeader>
+
+  <DetailBlock
+    id="what-we-do"
+    title="From a trip across town to three weeks on the road"
+    meta="What we do"
+    body={`We've been touring South Australia and interstate since ${business.established}, so we've done most trips and know how they're done best. Whatever you need, we'll help organise the details.`}
+    paper
+  >
+    <InfoCard title="Our services" tone="sand">
+      <ul class="checks">
+        {
+          about.services.map((service) => (
+            <li>
+              <Icon name="check" size={18} strokeWidth={2.2} />
+              {service}
+            </li>
+          ))
+        }
+      </ul>
+    </InfoCard>
+  </DetailBlock>
+
+  <section class="section" aria-labelledby="values-heading">
+    <div class="container stack">
+      <p class="eyebrow">Why travel with us</p>
+      <h2 id="values-heading" class="h2">Small business, big experience</h2>
+      <ul class="values">
+        {
+          about.values.map((value) => (
+            <li>
+              <h3>{value.title}</h3>
+              <p>{value.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .checks li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .checks :global(svg) {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--label-green);
+  }
+
+  .values {
+    display: grid;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .values li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 18px;
+    border-top: 2px solid var(--ink);
+  }
+
+  h3 {
+    font-size: var(--fs-h3);
+  }
+
+  .values p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  @media (min-width: 600px) {
+    .values {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 32px 24px;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .values {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

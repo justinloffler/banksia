@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import DetailBlock from '../components/DetailBlock.astro';
+import InfoCard from '../components/InfoCard.astro';
+import Collage from '../components/Collage.astro';
+import Snap from '../components/Snap.astro';
+import CtaBand from '../components/CtaBand.astro';
+import site from '../data/site.json';
+
+const { pages, groupTours, tours } = site;
+const page = pages.groupTours;
+const shortBreaks = tours.types.find((type) => type.title === 'Short breaks');
+const extended = tours.types.find((type) => type.title === 'Extended holidays');
+---
+
+<Base title={page.title} description={page.description}>
+  <PageHeader crumb="Group tours" eyebrow={page.eyebrow} heading={page.heading} lead={page.lead}>
+    <Collage ratio={568 / 520}>
+      <Snap src="flower-show.jpg" alt="A spring flower show in full bloom" caption="Flower show season" x={0} y={4} w={62} rotate={-3} eager />
+      <Snap src="coach-uluru.jpg" alt="Banksia coach and safari trailer at Uluru" caption="Further afield" x={46} y={40} w={52} rotate={3} eager />
+    </Collage>
+  </PageHeader>
+
+  <DetailBlock id="day-tours" title={groupTours.dayTours.title} meta={groupTours.dayTours.meta} body={groupTours.dayTours.body} paper>
+    <InfoCard title={groupTours.mystery.title} meta={groupTours.mystery.meta} tone="sand">
+      <p>{groupTours.mystery.body}</p>
+      <p>Mystery trips run through the <a href="/travel-club/">Banksia Travel Club</a>.</p>
+    </InfoCard>
+  </DetailBlock>
+
+  <DetailBlock id="short-breaks" title={groupTours.shortBreaks.title} meta={groupTours.shortBreaks.meta} body={groupTours.shortBreaks.body}>
+    <InfoCard title="Popular short breaks">
+      <ul>
+        {shortBreaks?.popular?.map((place) => <li>{place}</li>)}
+      </ul>
+    </InfoCard>
+  </DetailBlock>
+
+  <DetailBlock id="extended-holidays" title={groupTours.extended.title} meta={groupTours.extended.meta} body={groupTours.extended.body} paper>
+    <InfoCard title="Popular holidays">
+      <ul>
+        {extended?.popular?.map((place) => <li>{place}</li>)}
+      </ul>
+    </InfoCard>
+    <Fragment slot="after">
+      <div class="also">
+        <InfoCard title={groupTours.snow.title} tone="sand">
+          <p>{groupTours.snow.body}</p>
+        </InfoCard>
+        <InfoCard title="Camping & safaris" tone="sand">
+          <p>See the outback on a fully catered, self-contained safari. <a href="/camping-safaris/">Explore safaris →</a></p>
+        </InfoCard>
+      </div>
+    </Fragment>
+  </DetailBlock>
+
+  <CtaBand heading="Tell us where you'd like to go" />
+</Base>
+
+<style>
+  .also {
+    display: grid;
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  @media (min-width: 600px) {
+    .also {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

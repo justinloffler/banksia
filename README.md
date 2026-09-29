@@ -32,13 +32,29 @@ src/
   assets/photos/        tour photos
   styles/global.css     design tokens + shared styles
   layouts/Base.astro    <head>, SEO, header, footer
-  components/           one component per homepage section
-  pages/                index, terms, thank-you, enquiry-error, 404
+  components/           page sections and shared building blocks
+  pages/                one file per page (see below)
 public/
   .htaccess             redirects from the old site, caching, 404 page
   enquiry.php           enquiry form handler (PHP mail)
   favicon.svg, robots.txt
 ```
+
+## Pages
+
+| URL | File | What's on it |
+| --- | --- | --- |
+| `/` | `pages/index.astro` | Hero, tour types, teasers for safaris, Travel Club and coaches |
+| `/group-tours/` | `pages/group-tours.astro` | Day tours, mystery trips, short breaks, extended holidays, snow trips |
+| `/camping-safaris/` | `pages/camping-safaris.astro` | Safari details, kit and destinations |
+| `/charters/` | `pages/charters.astro` | Charters, seniors & interest groups, special events |
+| `/travel-club/` | `pages/travel-club.astro` | How the club works and each outing type |
+| `/coaches-drivers/` | `pages/coaches-drivers.astro` | Coach features, drivers, express long-distance runs |
+| `/about/` | `pages/about.astro` | The family story and services |
+| `/contact/` | `pages/contact.astro` | Contact details and the enquiry form |
+| `/terms/` | `pages/terms.astro` | Terms & conditions |
+
+Page titles and search descriptions are in `site.json` under `pages`. `thank-you`, `enquiry-error` and `404` are utility pages and are left out of the sitemap.
 
 ## Deploying to cPanel
 
@@ -51,4 +67,4 @@ public/
 3. In cPanel → File Manager, open `public_html`, back up the old site, then upload **the contents of `dist/`**. The hidden `.htaccess` file must be included. In File Manager, turn on Settings → "Show Hidden Files".
 4. Visit the site and send a test enquiry.
 
-The server needs PHP 8.0 or newer for the form; set it in cPanel → MultiPHP Manager. Old addresses like `/index.php/selectedContent/1783989715` redirect to the matching section of the new site. Once SSL is active, uncomment the HTTPS redirect at the top of `.htaccess`.
+The server needs PHP 8.0 or newer for the form; set it in cPanel → MultiPHP Manager. Old addresses like `/index.php/selectedContent/1783989715` redirect to the matching page of the new site. Once SSL is active, uncomment the HTTPS redirect at the top of `.htaccess`.

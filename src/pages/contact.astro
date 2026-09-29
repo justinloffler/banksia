@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import Contact from '../components/Contact.astro';
+import site from '../data/site.json';
+
+const page = site.pages.contact;
+---
+
+<Base title={page.title} description={page.description}>
+  <Contact />
+</Base>
