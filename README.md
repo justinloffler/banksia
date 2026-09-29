@@ -13,7 +13,8 @@ npm install
 npm run dev       # http://localhost:4321
 npm run check     # type-check .astro files
 npm run build     # production build into dist/
-npm run preview   # serve dist/ locally
+npm run preview   # serve the build locally
+npm start         # run the production server (after a build)
 ```
 
 ## Editing content
@@ -34,9 +35,9 @@ src/
   layouts/Base.astro    <head>, SEO, header, footer
   components/           page sections and shared building blocks
   pages/                one file per page (see below)
+  pages/api/enquiry.ts  enquiry form endpoint (sends email)
+  lib/enquiry.ts        form validation, SMTP sending, rate limit
 public/
-  .htaccess             redirects from the old site, caching, 404 page
-  enquiry.php           enquiry form handler (PHP mail)
   favicon.svg, robots.txt
 ```
 
@@ -56,19 +57,32 @@ public/
 
 Page titles and search descriptions are in `site.json` under `pages`. `thank-you`, `enquiry-error` and `404` are utility pages and are left out of the sitemap.
 
-## Deploying to cPanel
+## Enquiry form
 
-1. **Set up the enquiry email (first time only).** Open `public/enquiry.php` and set:
-   - `ENQUIRY_TO`: the inbox that should receive enquiries.
-   - `ENQUIRY_FROM`: a mailbox on the site's own domain, e.g. `website@banksiatours.com.au`. Create it in cPanel → Email Accounts. Mail from another domain is likely to be marked as spam.
+The contact form posts to `/api/enquiry` (`src/pages/api/enquiry.ts`), which sends the enquiry by email over SMTP using nodemailer. With JavaScript the form submits in the background and shows a thank-you message in place; without it, the browser is redirected to `/thank-you/` or `/enquiry-error/`. It has a hidden spam-trap field, input validation and a limit of 5 enquiries per visitor every 10 minutes.
 
-   Until `ENQUIRY_TO` is set, the form sends people to a "please call us" page instead.
-2. Run `npm run build`.
-3. In cPanel → File Manager, open `public_html`, back up the old site, then upload **the contents of `dist/`**. The hidden `.htaccess` file must be included. In File Manager, turn on Settings → "Show Hidden Files".
-4. Visit the site and send a test enquiry.
+Set these environment variables on the host (never commit them):
 
-### Staging (banksia.loffler.au)
+| Variable | Example | Notes |
+| --- | --- | --- |
+| `SMTP_HOST` | `mail.loffler.au` | Your mail server |
+| `SMTP_PORT` | `465` | 465 uses SSL; 587 uses STARTTLS |
+| `SMTP_USER` | `website@loffler.au` | Mailbox that sends the enquiries |
+| `SMTP_PASS` | — | That mailbox's password |
+| `ENQUIRY_TO` | `bookings@…` | Where enquiries are delivered |
+| `ENQUIRY_FROM` | `website@loffler.au` | Optional; defaults to `SMTP_USER` |
+| `SMTP_SECURE` | `true` / `false` | Optional; defaults to true on port 465 |
 
-On the server, from a clone of this repo: `bash scripts/deploy-staging.sh`. It builds the site, blocks search engines with `robots.txt`, keeps cPanel's PHP settings at the top of `.htaccess`, and syncs everything into `~/banksia.loffler.au`. It needs Node.js 22.12+ on the server.
+Until `SMTP_HOST` and `ENQUIRY_TO` are set, the form tells visitors to call instead.
 
-The server needs PHP 8.0 or newer for the form; set it in cPanel → MultiPHP Manager. Old addresses like `/index.php/selectedContent/1783989715` redirect to the matching page of the new site. Once SSL is active, uncomment the HTTPS redirect at the top of `.htaccess`.
+## Deploying (cPanel AI App Hosting / any Node host)
+
+The site runs as a Node app: pages are pre-built HTML served as static files, and only `/api/enquiry` and the old-URL redirects (`src/pages/index.php/[...path].ts`) run on the server.
+
+- **Repository:** `https://github.com/justinloffler/banksia.git`
+- **Node version:** 22.12 or newer
+- **Install / build command:** `npm ci && npm run build`
+- **Start command:** `npm start` (runs `node ./dist/server/entry.mjs`)
+- **Port:** the server listens on the `PORT` environment variable the host provides (default 8080).
+
+Old addresses like `/index.php/selectedContent/1783989715` are 301-redirected to the matching new page.

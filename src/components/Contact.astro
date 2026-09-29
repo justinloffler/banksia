@@ -38,7 +38,7 @@ const interestOptions = contact.form.fields.find((field) => field.name === 'inte
       </div>
     </div>
 
-    <form class="form" action="/enquiry.php" method="post" data-enquiry>
+    <form class="form" action="/api/enquiry" method="post" data-enquiry>
       <p class="form-intro">Or send us a message and we'll get back to you.</p>
 
       <div class="row">
@@ -80,24 +80,74 @@ const interestOptions = contact.form.fields.find((field) => field.name === 'inte
       </div>
 
       <p class="hint" id="contact-hint">Please give us a phone number or email so we can reply.</p>
-      <p class="error" role="alert" hidden>Please add a phone number or an email address so we can get back to you.</p>
+      <p class="error" role="alert" hidden></p>
 
       <button class="btn btn--primary" type="submit">{contact.form.submitLabel}</button>
     </form>
+
+    <div class="sent" role="status" tabindex="-1" hidden>
+      <h3>Thanks — we'll be in touch soon</h3>
+      <p>
+        {business.contactPerson} will get back to you shortly. If your trip is coming up soon, it's quickest to call us on{' '}
+        <a href={business.phoneHref}>{business.phone}</a>.
+      </p>
+    </div>
   </div>
 </section>
 
 <script>
   const form = document.querySelector<HTMLFormElement>('form[data-enquiry]');
   const error = form?.querySelector<HTMLElement>('.error');
+  const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const sent = document.querySelector<HTMLElement>('.sent');
+  const fallback = 'Sorry, something went wrong sending your enquiry. Please call us on 08 8380 5588.';
 
-  form?.addEventListener('submit', (event) => {
-    const phone = (form.elements.namedItem('phone') as HTMLInputElement).value.trim();
-    const email = (form.elements.namedItem('email') as HTMLInputElement).value.trim();
-    if (!phone && !email) {
-      event.preventDefault();
-      if (error) error.hidden = false;
-      (form.elements.namedItem('phone') as HTMLInputElement).focus();
+  const showError = (message: string) => {
+    if (!error) return;
+    error.textContent = message;
+    error.hidden = false;
+  };
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (error) error.hidden = true;
+
+    const field = (name: string) => form.elements.namedItem(name) as HTMLInputElement;
+    if (!field('phone').value.trim() && !field('email').value.trim()) {
+      showError('Please add a phone number or an email address so we can get back to you.');
+      field('phone').focus();
+      return;
+    }
+
+    const label = button?.textContent ?? '';
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Sending…';
+    }
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new URLSearchParams(new FormData(form) as unknown as Record<string, string>),
+      });
+      const result = await response.json().catch(() => ({ ok: false }));
+      if (response.ok && result.ok) {
+        form.hidden = true;
+        if (sent) {
+          sent.hidden = false;
+          sent.focus();
+        }
+        return;
+      }
+      showError(result.error ?? fallback);
+    } catch {
+      showError(fallback);
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = label;
+      }
     }
   });
 </script>
@@ -274,6 +324,31 @@ const interestOptions = contact.form.fields.find((field) => field.name === 'inte
     color: #7a2e0e;
     font-size: 14px;
     font-weight: 600;
+  }
+
+  .form .btn:disabled {
+    opacity: 0.7;
+    cursor: progress;
+  }
+
+  .sent {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: clamp(24px, 1rem + 1.2vw, 36px);
+    border-radius: 24px;
+    background: var(--paper);
+  }
+
+  .sent h3 {
+    font-size: clamp(24px, 1.3rem + 0.6vw, 30px);
+  }
+
+  .sent p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
   }
 
   .form .btn {

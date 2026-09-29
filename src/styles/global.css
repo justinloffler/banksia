@@ -139,6 +139,11 @@ ul {
 
 /* ---------- utilities ---------- */
 
+/* Components set display:flex/grid; make sure the hidden attribute still hides them. */
+[hidden] {
+  display: none !important;
+}
+
 .container {
   width: min(100% - 2 * var(--gutter), var(--container));
   margin-inline: auto;
