@@ -1,0 +1,264 @@
+---
+import site from '../data/site.json';
+import Icon from './Icon.astro';
+
+const { contact, business } = site;
+const interestOptions = contact.form.fields.find((field) => field.name === 'interest')?.options ?? [];
+---
+
+<section id="contact" class="contact container" aria-labelledby="contact-heading">
+  <div class="panel">
+    <div class="about stack">
+      <p class="eyebrow">{contact.eyebrow}</p>
+      <h2 id="contact-heading" class="h2">{contact.heading}</h2>
+      <p class="lead">{contact.body}</p>
+
+      <div class="details">
+        <a class="detail" href={business.phoneHref}>
+          <span class="circle circle--dark"><Icon name="phone" size={22} strokeWidth={2} /></span>
+          <span>
+            <span class="small">Call {business.contactPerson}</span>
+            <span class="big">{business.phone}</span>
+          </span>
+        </a>
+        <p class="detail">
+          <span class="circle"><Icon name="pin" size={22} strokeWidth={2} /></span>
+          <span>
+            <span class="small">Based in the {business.region}</span>
+            <span class="medium">{business.suburb} {business.state} {business.postcode}</span>
+            <span class="small nowrap">Fax {business.fax}</span>
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <form class="form" action="/enquiry.php" method="post" data-enquiry>
+      <p class="form-intro">Or send us a message and we'll get back to you.</p>
+
+      <div class="row">
+        <label>
+          <span>Your name <span class="req" aria-hidden="true">*</span></span>
+          <input type="text" name="name" autocomplete="name" required maxlength="100" />
+        </label>
+        <label>
+          Phone
+          <input type="tel" name="phone" autocomplete="tel" maxlength="40" />
+        </label>
+      </div>
+
+      <label>
+        Email
+        <input type="email" name="email" autocomplete="email" maxlength="200" />
+      </label>
+
+      <div class="row">
+        <label>
+          I'm interested in
+          <select name="interest">
+            {interestOptions.map((option) => <option>{option}</option>)}
+          </select>
+        </label>
+        <label>
+          Number of travellers
+          <input type="number" name="travellers" min="1" max="500" inputmode="numeric" />
+        </label>
+      </div>
+
+      <label>
+        Where and when?
+        <textarea name="message" rows="4" maxlength="3000"></textarea>
+      </label>
+
+      <div class="hp" aria-hidden="true">
+        <label>Leave this field empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+
+      <p class="hint" id="contact-hint">Please give us a phone number or email so we can reply.</p>
+      <p class="error" role="alert" hidden>Please add a phone number or an email address so we can get back to you.</p>
+
+      <button class="btn btn--primary" type="submit">{contact.form.submitLabel}</button>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('form[data-enquiry]');
+  const error = form?.querySelector<HTMLElement>('.error');
+
+  form?.addEventListener('submit', (event) => {
+    const phone = (form.elements.namedItem('phone') as HTMLInputElement).value.trim();
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value.trim();
+    if (!phone && !email) {
+      event.preventDefault();
+      if (error) error.hidden = false;
+      (form.elements.namedItem('phone') as HTMLInputElement).focus();
+    }
+  });
+</script>
+
+<style>
+  .contact {
+    padding-block: 0 var(--section-y);
+  }
+
+  .panel {
+    display: grid;
+    gap: 32px;
+    padding: clamp(28px, 1rem + 3vw, 64px) clamp(20px, 0.5rem + 3vw, 64px);
+    border-radius: var(--radius-panel);
+    background: var(--sand);
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 6px;
+  }
+
+  .detail {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .detail > span:last-child {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .circle {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+  }
+
+  .circle--dark {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--on-dark);
+  }
+
+  .small {
+    font-size: 14px;
+    color: var(--text-subtle);
+  }
+
+  .big {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 1.4rem + 0.6vw, 30px);
+    line-height: 1.2;
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  .medium {
+    font-size: clamp(16px, 0.95rem + 0.2vw, 18px);
+    font-weight: 600;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: clamp(20px, 1rem + 1.2vw, 36px);
+    border-radius: 24px;
+    background: var(--paper);
+  }
+
+  .form-intro {
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  .row {
+    display: grid;
+    gap: 16px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .req {
+    color: var(--accent);
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    min-height: 50px;
+    padding: 0 14px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--ink);
+    font: 400 16px/1.4 var(--font-body);
+  }
+
+  textarea {
+    padding-block: 12px;
+    resize: vertical;
+  }
+
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 1px;
+    border-color: var(--accent);
+  }
+
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .hint {
+    font-size: 13px;
+    color: var(--text-subtle);
+  }
+
+  .error {
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #fbe9e1;
+    color: #7a2e0e;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .form .btn {
+    width: 100%;
+  }
+
+  @media (min-width: 600px) {
+    .row {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .panel {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 64px;
+    }
+  }
+</style>

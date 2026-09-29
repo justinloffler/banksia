@@ -1,0 +1,167 @@
+---
+import site from '../data/site.json';
+
+const { travelClub, business } = site;
+const maxKm = 750;
+---
+
+<section id="club" class="section" aria-labelledby="club-heading">
+  <div class="container layout">
+    <div class="stack">
+      <p class="eyebrow">{travelClub.eyebrow}</p>
+      <h2 id="club-heading" class="h2">{travelClub.heading}</h2>
+      {travelClub.body.map((paragraph) => <p class="lead">{paragraph}</p>)}
+      <div class="join">
+        <a class="btn btn--primary" href={travelClub.joinCta.href}>{travelClub.joinCta.label}</a>
+        <p>
+          <strong>{travelClub.perks[0]}</strong>
+          <span>{travelClub.perks[1]}</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>How far members' outings go from Adelaide</h3>
+      <ul>
+        {
+          travelClub.outings.map((outing) => (
+            <li>
+              <p class="label">
+                <span class="name">{outing.name}</span>
+                <span class="note">{outing.note}</span>
+              </p>
+              <p class="range">
+                <span class="track" aria-hidden="true">
+                  <span
+                    class:list={['bar', { anywhere: outing.km === null }]}
+                    style={`width:${outing.km ? Math.round((outing.km / maxKm) * 100) : 100}%`}
+                  />
+                </span>
+                <span class="distance">
+                  {outing.km ? `Up to ${outing.range}` : outing.range}
+                </span>
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="footnote">Call {business.phone} to join and get the newsletter.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .layout {
+    display: grid;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .join {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-top: 6px;
+  }
+
+  .join p {
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  .join strong {
+    color: var(--ink);
+  }
+
+  .card {
+    padding: clamp(8px, 0.5rem + 1vw, 36px) clamp(20px, 1rem + 1.2vw, 40px);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: var(--paper);
+  }
+
+  h3 {
+    padding-block: 16px 18px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+  }
+
+  li {
+    display: grid;
+    gap: 10px;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .label {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .name {
+    font-family: var(--font-display);
+    font-size: clamp(19px, 1.1rem + 0.3vw, 22px);
+  }
+
+  .note {
+    font-size: 13px;
+    color: var(--text-subtle);
+  }
+
+  .range {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 11.5em;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .track {
+    display: block;
+  }
+
+  .bar {
+    display: block;
+    height: 10px;
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+  }
+
+  .bar.anywhere {
+    background: var(--ink);
+  }
+
+  .distance {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .footnote {
+    padding-block: 16px;
+    font-size: 14px;
+    color: var(--text-subtle);
+  }
+
+  @media (min-width: 600px) {
+    li {
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 20px;
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .layout {
+      grid-template-columns: 5fr 6fr;
+      gap: 80px;
+    }
+  }
+</style>

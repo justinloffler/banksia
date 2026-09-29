@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import SimplePage from '../components/SimplePage.astro';
+import site from '../data/site.json';
+
+const { business } = site;
+---
+
+<Base title="Page not found — Banksia Tours" noindex>
+  <SimplePage eyebrow="Page not found" title="That road doesn't go anywhere">
+    <p>
+      The page you were looking for has moved or no longer exists. Our new site has everything on one page — or call
+      us on <a href={business.phoneHref}>{business.phone}</a>.
+    </p>
+    <a class="btn btn--primary" href="/">Go to the home page</a>
+  </SimplePage>
+</Base>

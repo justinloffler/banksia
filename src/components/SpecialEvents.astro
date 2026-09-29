@@ -1,0 +1,105 @@
+---
+import site from '../data/site.json';
+
+const { specialEvents } = site;
+---
+
+<section class="section section--paper" aria-labelledby="events-heading">
+  <div class="container stack">
+    <div class="intro">
+      <div class="stack heading">
+        <p class="eyebrow">{specialEvents.eyebrow}</p>
+        <h2 id="events-heading" class="h2">{specialEvents.heading}</h2>
+      </div>
+      <p class="intro-body">{specialEvents.intro}</p>
+    </div>
+
+    <ul class="groups">
+      {
+        specialEvents.groups.map((group) => (
+          <li>
+            <h3>{group.title}</h3>
+            <ul>
+              {group.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .stack {
+    gap: clamp(24px, 1rem + 2vw, 44px);
+  }
+
+  .heading {
+    gap: 14px;
+  }
+
+  .intro {
+    display: grid;
+    gap: 16px;
+    align-items: end;
+  }
+
+  .intro-body {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+
+  .groups > li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 14px;
+    border-top: 2px solid var(--ink);
+  }
+
+  h3 {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--link);
+  }
+
+  .groups ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: clamp(14px, 0.85rem + 0.2vw, 16px);
+    line-height: 1.45;
+  }
+
+  @media (min-width: 900px) {
+    .intro {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 80px;
+    }
+
+    .groups {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px 24px;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .groups {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    h3 {
+      font-size: 13px;
+    }
+  }
+</style>

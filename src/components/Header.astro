@@ -1,0 +1,239 @@
+---
+import site from '../data/site.json';
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+
+const { business, nav } = site;
+
+// On inner pages, section links must point back at the homepage.
+const onHome = Astro.url.pathname === '/';
+const href = (link: string) => (onHome || !link.startsWith('#') ? link : `/${link}`);
+---
+
+<div class="utility">
+  <div class="container utility-inner">
+    <span>A family business touring South Australia and interstate since {business.established}</span>
+    <span class="utility-right">
+      <a href={business.phoneHref}>{business.phone}</a>
+      <span>{business.suburb}, {business.region} {business.state} {business.postcode}</span>
+    </span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="container header-inner">
+    <Logo />
+
+    <nav class="nav-desktop" aria-label="Main">
+      <ul>
+        {nav.map((item) => <li><a href={href(item.href)}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <a class="btn btn--primary call-desktop" href={business.phoneHref}>
+      <Icon name="phone" size={18} strokeWidth={2} />
+      {business.phone}
+    </a>
+
+    <div class="mobile-actions">
+      <a class="icon-btn icon-btn--accent" href={business.phoneHref} aria-label={`Call Banksia Tours on ${business.phone}`}>
+        <Icon name="phone" size={18} strokeWidth={2} />
+      </a>
+      <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <Icon name="menu" size={22} strokeWidth={2} class="icon-open" />
+        <Icon name="close" size={22} strokeWidth={2} class="icon-close" />
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" class="nav-mobile" aria-label="Main" hidden>
+    <ul class="container">
+      {nav.map((item) => <li><a href={href(item.href)}>{item.label}</a></li>)}
+      <li class="mobile-call">
+        <a class="btn btn--primary" href={business.phoneHref}>
+          <Icon name="phone" size={18} strokeWidth={2} />
+          Call {business.phone}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  if (toggle && menu) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      menu.hidden = !open;
+    };
+
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !menu.hidden) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    matchMedia('(min-width: 1100px)').addEventListener('change', (event) => {
+      if (event.matches) setOpen(false);
+    });
+  }
+</script>
+
+<style>
+  .utility {
+    display: none;
+    background: var(--ink);
+    color: #e9e3d5;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+
+  .utility-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 40px;
+  }
+
+  .utility-right {
+    display: flex;
+    gap: 24px;
+    color: var(--footer-muted);
+  }
+
+  .utility a {
+    color: var(--on-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--cream);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: var(--header-h);
+  }
+
+  .nav-desktop,
+  .call-desktop {
+    display: none;
+  }
+
+  .nav-desktop ul {
+    display: flex;
+    gap: clamp(18px, 1.6vw, 30px);
+  }
+
+  .nav-desktop a,
+  .nav-mobile a:not(.btn) {
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .nav-desktop a:hover {
+    color: var(--accent);
+  }
+
+  .call-desktop {
+    min-height: 48px;
+    padding: 0 22px;
+    font-size: 15px;
+  }
+
+  .mobile-actions {
+    display: flex;
+    gap: 4px;
+    margin-right: -8px;
+  }
+
+  .icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .icon-btn--accent {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .icon-btn--accent:hover {
+    color: #fff;
+  }
+
+  .menu-toggle[aria-expanded='true'] :global(.icon-open),
+  .menu-toggle[aria-expanded='false'] :global(.icon-close) {
+    display: none;
+  }
+
+  .nav-mobile {
+    border-top: 1px solid var(--line);
+    background: var(--cream);
+  }
+
+  .nav-mobile ul {
+    display: flex;
+    flex-direction: column;
+    padding-block: 8px 20px;
+  }
+
+  .nav-mobile li:not(.mobile-call) a {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-display);
+    font-size: 21px;
+  }
+
+  .mobile-call {
+    margin-top: 16px;
+  }
+
+  .mobile-call .btn {
+    width: 100%;
+  }
+
+  @media (min-width: 900px) {
+    .utility {
+      display: block;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .nav-desktop,
+    .call-desktop {
+      display: flex;
+    }
+
+    .mobile-actions,
+    .nav-mobile {
+      display: none;
+    }
+  }
+</style>

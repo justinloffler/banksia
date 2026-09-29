@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import SimplePage from '../components/SimplePage.astro';
+import site from '../data/site.json';
+
+const { business } = site;
+---
+
+<Base title="Enquiry not sent — Banksia Tours" noindex>
+  <SimplePage eyebrow="Something went wrong" title="Sorry, your enquiry didn't go through">
+    <p>
+      Please check you've included your name and a phone number or email address, then try again. Or skip the form
+      and call us on <a href={business.phoneHref}>{business.phone}</a>.
+    </p>
+    <a class="btn btn--primary" href="/#contact">Try again</a>
+  </SimplePage>
+</Base>

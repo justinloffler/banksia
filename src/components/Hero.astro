@@ -1,0 +1,172 @@
+---
+import site from '../data/site.json';
+import Collage from './Collage.astro';
+import Icon from './Icon.astro';
+import Snap from './Snap.astro';
+
+const { hero, business } = site;
+const [coach, uluru, pea, group] = hero.photos;
+---
+
+<section class="hero container" aria-labelledby="hero-heading">
+  <div class="copy">
+    <p class="eyebrow"><span class="rule" aria-hidden="true"></span>{hero.eyebrow}</p>
+    <h1 id="hero-heading">{hero.heading}</h1>
+    <p class="lead">{hero.body}</p>
+    <div class="ctas">
+      <a class="btn btn--primary" href={hero.primaryCta.href}>
+        {hero.primaryCta.label}
+        <Icon name="arrow" size={18} strokeWidth={2} />
+      </a>
+      <a class="btn btn--secondary" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+    </div>
+    <dl class="stats">
+      {
+        hero.stats.map((stat) => (
+          <div>
+            <dt>{stat.label}</dt>
+            <dd>{stat.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+
+  <Collage ratio={568 / 670} class="hero-collage">
+    <Snap {...coach} x={12.3} y={3} w={74.6} rotate={-3} eager />
+    <Snap {...uluru} x={56} y={39.5} w={44} rotate={4} eager />
+    <Snap {...pea} x={0} y={52.5} w={35.2} rotate={-6} ratio={3 / 4} eager />
+    <Snap {...group} x={37.3} y={65} w={49.3} rotate={1.5} ratio={1.4} eager />
+    <div class="badge" aria-hidden="true">
+      <span>Since</span>
+      <strong>{business.established}</strong>
+      <span class="small">{business.suburb} {business.state}</span>
+    </div>
+  </Collage>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    gap: 40px;
+    align-items: center;
+    padding-block: 32px 56px;
+  }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .rule {
+    width: 28px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-size: var(--fs-h1);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+  }
+
+  .lead {
+    max-width: 520px;
+  }
+
+  .ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 6px;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, max-content));
+    gap: 20px 32px;
+    margin: 12px 0 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .stats div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+
+  dt {
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(26px, 1.4rem + 0.6vw, 30px);
+    line-height: 1.1;
+  }
+
+  .badge {
+    position: absolute;
+    left: 80%;
+    top: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20.4%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(31, 42, 34, 0.18);
+    transform: rotate(8deg);
+    font-size: max(9px, 1.9cqi);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .badge strong {
+    font-family: var(--font-display);
+    font-size: max(20px, 6cqi);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+
+  .badge .small {
+    font-size: max(8px, 1.7cqi);
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 599px) {
+    .badge .small {
+      display: none;
+    }
+  }
+
+  @media (min-width: 600px) {
+    .ctas {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .hero {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 64px;
+      padding-block: 72px 96px;
+    }
+
+    .copy {
+      gap: 28px;
+    }
+  }
+</style>

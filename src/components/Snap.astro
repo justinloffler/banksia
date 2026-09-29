@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import { photo } from '../lib/photos';
+
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  /** Position and width as percentages of the collage box. */
+  x: number;
+  y: number;
+  w: number;
+  rotate?: number;
+  /** Image crop ratio, width / height. */
+  ratio?: number;
+  eager?: boolean;
+}
+
+const { src, alt, caption, x, y, w, rotate = 0, ratio = 4 / 3, eager = false } = Astro.props;
+const image = photo(src);
+---
+
+<figure
+  class="snap"
+  style={`left:${x}%;top:${y}%;width:${w}%;--rotate:${rotate}deg;--ratio:${ratio}`}
+>
+  <Image
+    src={image}
+    alt={alt}
+    widths={[image.width]}
+    sizes={`${Math.round((w / 100) * 580)}px`}
+    loading={eager ? 'eager' : 'lazy'}
+  />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .snap {
+    position: absolute;
+    margin: 0;
+    padding: max(7px, 2cqi) max(7px, 2cqi) 0;
+    background: #fff;
+    box-shadow:
+      0 1px 2px rgba(31, 42, 34, 0.1),
+      0 12px 28px rgba(31, 42, 34, 0.16);
+    transform: rotate(var(--rotate));
+    transition: transform 0.25s ease;
+  }
+
+  .snap:hover {
+    transform: rotate(0deg) scale(1.02);
+    z-index: 2;
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: var(--ratio);
+    object-fit: cover;
+  }
+
+  figcaption {
+    padding: 0.35em 0.2em 0.45em;
+    font-family: var(--font-hand);
+    font-size: max(16px, 3.7cqi);
+    line-height: 1.1;
+    color: #3a4238;
+  }
+
+  .snap:not(:has(figcaption)) {
+    padding-bottom: max(18px, 5cqi);
+  }
+</style>

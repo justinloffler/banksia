@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import SimplePage from '../components/SimplePage.astro';
+import site from '../data/site.json';
+
+const { terms, business } = site;
+---
+
+<Base
+  title="Terms & conditions — Banksia Tours"
+  description="Payment, deposit, refund and cancellation terms for Banksia Tours day trips, charters, tours and extended holidays."
+>
+  <SimplePage eyebrow="Bookings" title="Terms & conditions">
+    <h2>Payment</h2>
+    <p>We accept:</p>
+    <ul>
+      {terms.payment.map((method) => <li>{method}</li>)}
+    </ul>
+
+    <h2>Deposits</h2>
+    <p>{terms.deposits}</p>
+
+    <h2>Local charters &amp; tours</h2>
+    <p>{terms.localChartersAndTours}</p>
+
+    <h2>Long-distance charters &amp; tours</h2>
+    <p>{terms.longDistance}</p>
+
+    <h2>Extended holidays</h2>
+    <p>{terms.extendedHolidays}</p>
+
+    <h2>Refunds &amp; cancellations</h2>
+    <p>{terms.refunds}</p>
+
+    <p>Questions? Call {business.contactPerson} on <a href={business.phoneHref}>{business.phone}</a>.</p>
+  </SimplePage>
+</Base>

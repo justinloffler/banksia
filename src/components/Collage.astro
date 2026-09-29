@@ -1,0 +1,24 @@
+---
+interface Props {
+  /** Box width / height, from the design. */
+  ratio: number;
+  class?: string;
+}
+
+const { ratio, class: className } = Astro.props;
+---
+
+<div class:list={['collage', className]} style={`--ratio:${ratio}`}>
+  <slot />
+</div>
+
+<style>
+  .collage {
+    position: relative;
+    container-type: inline-size;
+    width: 100%;
+    max-width: 580px;
+    margin-inline: auto;
+    aspect-ratio: var(--ratio);
+  }
+</style>

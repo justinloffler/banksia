@@ -1,0 +1,56 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+}
+
+const { eyebrow, title } = Astro.props;
+---
+
+<section class="simple container">
+  <p class="eyebrow">{eyebrow}</p>
+  <h1>{title}</h1>
+  <div class="body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .simple {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 760px;
+    padding-block: clamp(40px, 2rem + 4vw, 96px);
+  }
+
+  h1 {
+    font-size: var(--fs-h2);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .body :global(h2) {
+    margin-top: 16px;
+    font-size: clamp(22px, 1.2rem + 0.5vw, 26px);
+    color: var(--ink);
+  }
+
+  .body :global(ul) {
+    padding-left: 1.2em;
+    list-style: disc;
+  }
+
+  .body :global(.btn) {
+    align-self: flex-start;
+  }
+</style>

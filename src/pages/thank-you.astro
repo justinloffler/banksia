@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import SimplePage from '../components/SimplePage.astro';
+import site from '../data/site.json';
+
+const { business } = site;
+---
+
+<Base title="Thanks for your enquiry — Banksia Tours" noindex>
+  <SimplePage eyebrow="Enquiry sent" title="Thanks — we'll be in touch soon">
+    <p>
+      We've received your message and {business.contactPerson} will get back to you shortly. If your trip is
+      coming up soon, it's quickest to give us a call on <a href={business.phoneHref}>{business.phone}</a>.
+    </p>
+    <a class="btn btn--secondary" href="/">Back to the home page</a>
+  </SimplePage>
+</Base>

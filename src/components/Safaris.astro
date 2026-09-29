@@ -1,0 +1,79 @@
+---
+import site from '../data/site.json';
+import Collage from './Collage.astro';
+import Icon from './Icon.astro';
+import Snap from './Snap.astro';
+
+const { safaris } = site;
+const [tents, kitchen, lunch, peas] = safaris.photos;
+---
+
+<section id="safaris" class="section section--forest" aria-labelledby="safaris-heading">
+  <div class="container split">
+    <div class="stack">
+      <p class="eyebrow">{safaris.eyebrow}</p>
+      <h2 id="safaris-heading" class="h2">{safaris.heading}</h2>
+      <p class="lead">{safaris.body}</p>
+
+      <ul class="checklist">
+        {
+          safaris.kit.map((item) => (
+            <li>
+              <Icon name="check" size={18} strokeWidth={2.2} />
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="destinations">
+        <h3>Safari destinations</h3>
+        <ul>
+          {safaris.destinations.map((place) => <li>{place}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <Collage ratio={564 / 620}>
+      <Snap {...tents} x={1.8} y={0} w={64.5} rotate={-2} />
+      <Snap {...kitchen} x={52} y={24} w={47} rotate={3} />
+      <Snap {...lunch} x={7} y={53} w={47.9} rotate={-4} />
+      <Snap {...peas} x={55.5} y={63} w={43} rotate={2} />
+    </Collage>
+  </div>
+</section>
+
+<style>
+  .lead {
+    max-width: 540px;
+  }
+
+  .destinations {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  h3 {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--footer-label);
+  }
+
+  .destinations ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .destinations li {
+    padding: 8px 14px;
+    border: 1px solid var(--chip-line-dark);
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+  }
+</style>

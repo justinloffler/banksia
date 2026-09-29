@@ -1,0 +1,60 @@
+---
+import site from '../data/site.json';
+import Collage from './Collage.astro';
+import Icon from './Icon.astro';
+import Snap from './Snap.astro';
+
+const { coaches } = site;
+const [front, interior] = coaches.photos;
+---
+
+<section id="coaches" class="section" aria-labelledby="coaches-heading">
+  <div class="container split">
+    <Collage ratio={564 / 540}>
+      <Snap {...front} x={0} y={0} w={68} rotate={-2} />
+      <Snap {...interior} x={44.3} y={46} w={55} rotate={3} />
+    </Collage>
+
+    <div class="stack">
+      <p class="eyebrow">{coaches.eyebrow}</p>
+      <h2 id="coaches-heading" class="h2">{coaches.heading}</h2>
+      <p class="lead">{coaches.body}</p>
+      <ul class="checklist">
+        {
+          coaches.features.map((feature) => (
+            <li>
+              <Icon name="check" size={18} strokeWidth={2.2} />
+              {feature}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="drivers">
+        <Icon name="shield" size={28} class="drivers-icon" />
+        <p>{coaches.drivers}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .drivers {
+    display: flex;
+    gap: 18px;
+    padding: 20px 22px;
+    border-radius: 16px;
+    background: var(--sand);
+  }
+
+  .drivers :global(.drivers-icon) {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--label-green);
+  }
+
+  .drivers p {
+    font-size: clamp(15px, 0.9rem + 0.15vw, 16px);
+    line-height: 1.6;
+    color: #3a4238;
+  }
+</style>
