@@ -67,4 +67,8 @@ Page titles and search descriptions are in `site.json` under `pages`. `thank-you
 3. In cPanel → File Manager, open `public_html`, back up the old site, then upload **the contents of `dist/`**. The hidden `.htaccess` file must be included. In File Manager, turn on Settings → "Show Hidden Files".
 4. Visit the site and send a test enquiry.
 
+### Staging (banksia.loffler.au)
+
+On the server, from a clone of this repo: `bash scripts/deploy-staging.sh`. It builds the site, blocks search engines with `robots.txt`, keeps cPanel's PHP settings at the top of `.htaccess`, and syncs everything into `~/banksia.loffler.au`. It needs Node.js 22.12+ on the server.
+
 The server needs PHP 8.0 or newer for the form; set it in cPanel → MultiPHP Manager. Old addresses like `/index.php/selectedContent/1783989715` redirect to the matching page of the new site. Once SSL is active, uncomment the HTTPS redirect at the top of `.htaccess`.
