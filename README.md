@@ -45,9 +45,9 @@ site/public/
 
 ## Pages
 
-| URL | File | What's on it |
+| URL | File (in `site/src/`) | What's on it |
 | --- | --- | --- |
-| `/` | `site/src/pages/index.astro` | Hero, tour types, teasers for safaris, Travel Club and coaches |
+| `/` | `pages/index.astro` | Hero, tour types, teasers for safaris, Travel Club and coaches |
 | `/group-tours/` | `pages/group-tours.astro` | Day tours, mystery trips, short breaks, extended holidays, snow trips |
 | `/camping-safaris/` | `pages/camping-safaris.astro` | Safari details, kit and destinations |
 | `/charters/` | `pages/charters.astro` | Charters, seniors & interest groups, special events |
