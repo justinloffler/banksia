@@ -40,8 +40,10 @@ site/src/
   pages/api/enquiry.ts  enquiry form endpoint (sends email)
   lib/enquiry.ts        form validation, SMTP sending, rate limit
 site/public/
-  favicon.svg, robots.txt
+  favicon.svg
 ```
+
+`robots.txt` is generated per request (`site/src/pages/robots.txt.ts`): search engines may crawl only `www.banksiatours.com.au`; every other host, including the `banksia.loffler.au` test site, is blocked.
 
 ## Pages
 
