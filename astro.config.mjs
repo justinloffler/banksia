@@ -5,8 +5,10 @@ import node from '@astrojs/node';
 
 export default defineConfig({
   site: 'https://www.banksiatours.com.au',
-  // Pages are pre-built HTML; only /api/enquiry runs on the server.
-  output: 'static',
+  // 'server' so hosts (e.g. cPanel Web Apps) run the Node server; every page
+  // still opts into pre-rendering, so only /api/enquiry and the old-URL
+  // redirects actually run on each request.
+  output: 'server',
   adapter: node({ mode: 'standalone' }),
   server: { host: true },
   // 'ignore' so POSTs to /api/enquiry aren't redirected (which drops the form data).

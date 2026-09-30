@@ -8,6 +8,8 @@ import site from '../data/site.json';
 
 const { pages, coachesPage } = site;
 const page = pages.coaches;
+
+export const prerender = true;
 ---
 
 <Base title={page.title} description={page.description}>

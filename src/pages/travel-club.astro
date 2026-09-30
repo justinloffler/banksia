@@ -6,6 +6,8 @@ import site from '../data/site.json';
 
 const { pages, travelClub, business } = site;
 const page = pages.travelClub;
+
+export const prerender = true;
 ---
 
 <Base title={page.title} description={page.description}>

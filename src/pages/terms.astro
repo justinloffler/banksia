@@ -4,6 +4,8 @@ import SimplePage from '../components/SimplePage.astro';
 import site from '../data/site.json';
 
 const { terms, business } = site;
+
+export const prerender = true;
 ---
 
 <Base

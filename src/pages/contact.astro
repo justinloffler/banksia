@@ -4,6 +4,8 @@ import Contact from '../components/Contact.astro';
 import site from '../data/site.json';
 
 const page = site.pages.contact;
+
+export const prerender = true;
 ---
 
 <Base title={page.title} description={page.description}>

@@ -11,6 +11,8 @@ import site from '../data/site.json';
 
 const { pages, about, business } = site;
 const page = pages.about;
+
+export const prerender = true;
 ---
 
 <Base title={page.title} description={page.description}>

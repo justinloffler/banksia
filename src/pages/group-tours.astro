@@ -12,6 +12,8 @@ const { pages, groupTours, tours } = site;
 const page = pages.groupTours;
 const shortBreaks = tours.types.find((type) => type.title === 'Short breaks');
 const extended = tours.types.find((type) => type.title === 'Extended holidays');
+
+export const prerender = true;
 ---
 
 <Base title={page.title} description={page.description}>
