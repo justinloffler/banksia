@@ -1,0 +1,13 @@
+{
+  "name": "banksia-tours-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Entry point for Node hosts that detect Astro projects as static-only (e.g. cPanel Web Apps). Builds and runs the site in the parent folder.",
+  "scripts": {
+    "build": "cd .. && npm ci && npm run build",
+    "start": "node ../dist/server/entry.mjs"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}
